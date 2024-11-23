@@ -9,7 +9,7 @@ function App() {
   const NavberRouter = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem("token", "sdfds");
+    localStorage.setItem("token", "jdasljkf");
     if (token === "") {
       NavberRouter("/");
     } else {
@@ -18,7 +18,7 @@ function App() {
   }, [setToken]);
 
   return (
-    <div className="bg-[#F1F2F6] w-full h-full">
+    <div className="bg-[#F1F2F6] w-full h-screen">
       {token === "" ? (
         <Outlet />
       ) : (

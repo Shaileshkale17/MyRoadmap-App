@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-
-const ProjectTable = ({ handleActionChange }) => {
+import DeleteIcon from "../assets/mdi_bin-outline.svg";
+import UpdateIcon from "../assets/tabler_edit.svg";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setProjects,
+  editProject,
+  deleteProject,
+} from "../features/projectsSlice";
+const ProjectTable = ({ handleActionChange, search }) => {
+  const dispatch = useDispatch();
+  const getProjects = useSelector((state) => state.project.project);
   // Sample data
+
   const projects = [
     {
       id: 1,
@@ -125,7 +135,7 @@ const ProjectTable = ({ handleActionChange }) => {
       bugs: "Minor Bugs",
     },
     {
-      id: 10,
+      id: 11,
       name: "Healthcare Management System",
       technologies: "Vue.js, Firebase",
       startDate: "2023-10-01",
@@ -137,7 +147,7 @@ const ProjectTable = ({ handleActionChange }) => {
       bugs: "Minor Bugs",
     },
     {
-      id: 10,
+      id: 12,
       name: "Healthcare Management System",
       technologies: "Vue.js, Firebase",
       startDate: "2023-10-01",
@@ -149,6 +159,10 @@ const ProjectTable = ({ handleActionChange }) => {
       bugs: "Minor Bugs",
     },
   ];
+
+  useEffect(() => {
+    dispatch(setProjects(projects));
+  }, [dispatch]);
 
   return (
     <div>
@@ -184,76 +198,98 @@ const ProjectTable = ({ handleActionChange }) => {
               Bug's Summary
             </th>
             <th className="border border-gray-400 px-4 py-2 text-left">
+              Show project
+            </th>
+            <th className="border border-gray-400 px-4 py-2 text-left">
               Action
             </th>
           </tr>
         </thead>
         <tbody
           className={`${projects.length >= 11 ? "overflow-y-scroll" : ""}`}>
-          {projects.map((project, index) => (
-            <tr key={project.id}>
-              <td className="border border-gray-400 px-2 py-2">{index + 1}</td>
-              <td
-                className="border border-gray-400 px-2 py-2 cursor-pointer"
-                onClick={() =>
-                  handleActionChange("viewDescription", project.id)
-                }>
-                {project.name}
-              </td>
-              <td
-                className="border border-gray-400 px-2 py-2 cursor-pointer"
-                onClick={() =>
-                  handleActionChange("viewTechnologies", project.id)
-                }>
-                {project.technologies}
-              </td>
-              <td
-                className="border border-gray-400 px-2 py-2"
-                onClick={() => handleActionChange("startDate", project.id)}>
-                {project.startDate}
-              </td>
-              <td className="border border-gray-400 px-2 py-2">
-                {project.endDate}
-              </td>
-              <td className="border border-gray-400 px-2 py-2">
-                <Link to={project.github} className="text-blue-600">
-                  GitHub
-                </Link>
-              </td>
-              <td className="border border-gray-400 px-2 py-2">
-                <a href={project.deploy} className="text-blue-600">
-                  Deploy
-                </a>
-              </td>
-              <td className="border border-gray-400 px-2 py-2">
-                <a href={project.figma} className="text-blue-600">
-                  Figma
-                </a>
-              </td>
-              <td
-                className="border border-gray-400 px-2 py-2 cursor-pointer"
-                onClick={() => handleActionChange("viewStatus", project.id)}>
-                {project.status}
-              </td>
-              <td
-                className="border border-gray-400 px-2 py-2 cursor-pointer"
-                onClick={() => handleActionChange("viewBug", project.id)}>
-                {project.bugs}
-              </td>
-              <td className="border border-gray-400 px-2 py-2">
-                <button
-                  className="bg-blue-500 text-white px-3 py-1 rounded"
-                  onClick={() => handleActionChange("edit", project.id)}>
-                  Edit
-                </button>
-                <button
-                  className="bg-red-500 text-white px-3 py-1 rounded ml-2"
-                  onClick={() => handleActionChange("delete", project.id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {getProjects
+            .filter((project) =>
+              project.name.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((project, index) => (
+              <tr key={project.id}>
+                <td className="border border-gray-400 px-2 text-center py-2">
+                  {index + 1}
+                </td>
+                <td
+                  className="border border-gray-400 px-2 py-2 text-center cursor-pointer"
+                  onClick={() =>
+                    handleActionChange("viewDescription", project.id)
+                  }>
+                  {project.name.length <= 15
+                    ? project.name
+                    : project.name.slice(0, 15) + "..."}
+                </td>
+                <td
+                  className="border border-gray-400 px-2 py-2 text-center cursor-pointer"
+                  onClick={() =>
+                    handleActionChange("viewTechnologies", project.id)
+                  }>
+                  {project.technologies.length <= 15
+                    ? project.technologies
+                    : project.technologies.slice(0, 15) + "..."}
+                </td>
+                <td
+                  className="border border-gray-400 px-4 py-2 text-center cursor-pointer"
+                  onClick={() => handleActionChange("startDate", project.id)}>
+                  {project.startDate}
+                </td>
+                <td
+                  className="border border-gray-400 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleActionChange("EndDate", project.id)}>
+                  {project.endDate}
+                </td>
+                <td className="border border-gray-400 px-2 py-2 text-center cursor-pointer">
+                  <Link to={project.github} className="text-blue-600">
+                    GitHub
+                  </Link>
+                </td>
+                <td className="border border-gray-400 px-2 py-2 text-center cursor-pointer">
+                  <a href={project.deploy} className="text-blue-600">
+                    Deploy
+                  </a>
+                </td>
+                <td className="border border-gray-400 px-2 py-2 text-center cursor-pointer">
+                  <a href={project.figma} className="text-blue-600">
+                    Figma
+                  </a>
+                </td>
+                <td
+                  className="border border-gray-400 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleActionChange("viewStatus", project.id)}>
+                  {project.status.length <= 15
+                    ? project.status
+                    : project.status.slice(0, 15) + "..."}
+                </td>
+                <td
+                  className="border border-gray-400 px-2 py-2 text-center cursor-pointer"
+                  onClick={() => handleActionChange("viewBug", project.id)}>
+                  {project.bugs.length <= 15
+                    ? project.bugs
+                    : project.bugs.slice(0, 15) + "..."}
+                </td>
+                <td
+                  className="border border-gray-400 px-2 py-2 text-center  cursor-pointer"
+                  onClick={() => handleActionChange("showProject", project.id)}>
+                  Yes
+                </td>
+                <td className="border border-gray-400 text-center px-2 py-2 ">
+                  <button
+                    onClick={() => handleActionChange("edit", project.id)}>
+                    <img src={UpdateIcon} alt="Update" />
+                  </button>
+                  <button
+                    onClick={() => handleActionChange("delete", project.id)}>
+                    <img src={DeleteIcon} alt="Delete" />
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

@@ -23,21 +23,23 @@ const ProjectDescriptionComponent = ({ handleActionChange }) => {
     setDescription(Arraays[0].Description);
   }, []);
   return (
-    <div
-      className={`h-[18rem] w-[30rem] bg-[#CEECCA] border border-solid border-black relative ${
-        Description.length >= 571 ? "overflow-y-scroll" : ""
-      }`}>
-      <span>
-        <img
-          src={X}
-          alt="X"
-          className="absolute right-5 top-3 cursor-pointer"
-          onClick={() => handleActionChange(null, null)}
-        />
-      </span>
-      <div className={`mt-5 px-3 flex flex-col gap-3 `}>
-        <h2 className="font-bold text-start text-lg">Project Description</h2>
-        <p>{Description}</p>
+    <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
+      <div
+        className={`h-[18rem] w-[30rem] bg-bodyColor border border-solid border-black relative ${
+          Description.length >= 571 ? "overflow-y-scroll" : ""
+        }`}>
+        <span>
+          <img
+            src={X}
+            alt="X"
+            className="absolute right-5 top-3 cursor-pointer"
+            onClick={() => handleActionChange(null, null)}
+          />
+        </span>
+        <div className={`mt-5 px-3 flex flex-col gap-3 `}>
+          <h2 className="font-bold text-start text-lg">Project Description</h2>
+          <p>{Description}</p>
+        </div>
       </div>
     </div>
   );

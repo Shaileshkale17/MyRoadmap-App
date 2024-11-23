@@ -13,12 +13,12 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen text-center bg-[#62825D] flex justify-center items-center">
-      <div className="bg-[#8BA287] h-[27rem] w-[27rem] rounded-md border border-solid border-black ">
-        <Heading Title="Login" />
+    <div className="w-full h-screen text-center bg-bodyColor flex justify-center items-center">
+      <div className="bg-[#C6DCE4] h-[27rem] w-[27rem] rounded-md border border-solid border-bodyColor ">
+        <Heading Title="Login" font="font-medium" />
         <form
           onSubmit={Submit}
-          className="flex flex-col justify-center items-center gap-5">
+          className="flex flex-col justify-center items-center gap-5 ">
           <InputBox
             label="Email ID"
             id="email"

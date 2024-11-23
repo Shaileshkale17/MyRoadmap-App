@@ -7,7 +7,7 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
   };
 
   return (
-    <div className="flex items-center border border-black rounded-full px-4 py-2 bg-gray-300 w-96">
+    <div className="flex items-center border border-black rounded-full px-4 py-2 bg-bodyColor w-96">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-6 w-6 text-gray-700 mr-3"

@@ -10,6 +10,8 @@ import DeleteComponent from "../components/DeleteComponent";
 import StartComponent from "../components/StartComponent";
 import { useNavigate } from "react-router-dom";
 import TechnologiesDescriptionComponent from "../components/TechnologiesDescriptionComponent";
+import EndDateComponent from "../components/EndDateComponent";
+import ShowProjectComponent from "../components/ShowProjectComponent";
 const Dashbord = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentAction, setCurrentAction] = useState({
@@ -35,16 +37,21 @@ const Dashbord = () => {
         return (
           <ProjectDescriptionComponent
             handleActionChange={handleActionChange}
+            id={currentAction.id}
           />
         );
       case "viewStatus":
         return (
-          <ProjectStatusComponent handleActionChange={handleActionChange} />
+          <ProjectStatusComponent
+            handleActionChange={handleActionChange}
+            id={currentAction.id}
+          />
         );
       case "viewTechnologies":
         return (
           <TechnologiesDescriptionComponent
             handleActionChange={handleActionChange}
+            id={currentAction.id}
           />
         );
       case "viewBug":
@@ -60,25 +67,48 @@ const Dashbord = () => {
         return (
           <DeleteComponent
             handleActionChange={handleActionChange}
-            itemName={currentAction.itemName} // Pass the itemName
-            onDelete={handleDelete} // Pass the handleDelete function
+            itemName={currentAction.itemName}
+            onDelete={handleDelete}
+            id={currentAction.id}
           />
         );
       case "startDate":
-        return <StartComponent handleActionChange={handleActionChange} />;
+        return (
+          <StartComponent
+            handleActionChange={handleActionChange}
+            id={currentAction.id}
+          />
+        );
+      case "EndDate":
+        return (
+          <EndDateComponent
+            handleActionChange={handleActionChange}
+            id={currentAction.id}
+          />
+        );
+      case "showProject":
+        return (
+          <ShowProjectComponent
+            handleActionChange={handleActionChange}
+            id={currentAction.id}
+          />
+        );
       default:
         return null;
     }
   };
 
   return (
-    <div className="w-full h-full bg-[#CEECCA] relative">
+    <div className="w-full h-full bg-bodyColor relative">
       <div className="flex flex-row justify-between px-16 pt-4 items-center">
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <Button title="Create Note" type="text" link="/form" />
       </div>
-      <div className="flex justify-center my-9">
-        <ProjectTable handleActionChange={handleActionChange} />
+      <div className="flex justify-center mt-9 pb-9">
+        <ProjectTable
+          handleActionChange={handleActionChange}
+          search={searchTerm}
+        />
       </div>
 
       {/* Component rendering based on the selected action */}

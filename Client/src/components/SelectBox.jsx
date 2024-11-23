@@ -10,7 +10,7 @@ const SelectBox = ({ id, label, setInputValue, InputValue, options = [] }) => {
         id={id}
         value={InputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        className="rounded-lg w-[21rem] p-2 ">
+        className="rounded-lg w-[21rem] p-2 border border-solid border-black">
         {options.map((option) => (
           <option key={option.value} value={option.value} className="h-36">
             {option.label}

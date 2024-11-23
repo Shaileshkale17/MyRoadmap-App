@@ -7,7 +7,7 @@ const Button = ({ title, type, link }) => {
       <Link to={link}>
         <button
           type={type}
-          className="px-10 py-2 bg-[#D9D9D9] rounded-xl border border-black">
+          className="px-10 py-2 bg-primaryColor rounded-xl border text-white text-base font-bold">
           {title}
         </button>
       </Link>
