@@ -6,11 +6,12 @@ const InputBox = ({
   type,
   setInputValue,
   InputValue,
-  width = "w-[21rem]",
+  width = "md:w-[21rem]",
+  lableStyle,
 }) => {
   return (
     <div className="flex flex-col gap-1 items-start">
-      <label htmlFor={id} className="text-lg font-medium">
+      <label htmlFor={id} className={`text-lg font-medium ${lableStyle}`}>
         {label}
       </label>
       <input

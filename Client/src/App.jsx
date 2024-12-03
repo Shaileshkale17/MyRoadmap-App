@@ -9,7 +9,7 @@ function App() {
   const NavberRouter = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem("token", "jdasljkf");
+    localStorage.setItem("token", "");
     if (token === "") {
       NavberRouter("/");
     } else {
