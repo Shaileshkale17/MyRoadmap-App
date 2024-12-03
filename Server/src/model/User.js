@@ -32,6 +32,14 @@ const UserSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
+    project: {
+      type: Array,
+      default: [],
+    },
+    topproject: {
+      type: Array,
+      default: [],
+    },
   },
   {
     timestamps: true,

@@ -39,6 +39,10 @@ if (cluster.isPrimary) {
     },
   });
 
+  io.on("connection", (socket) => {
+    socket.emit("hello", "world !");
+  });
+
   CreateConnection()
     .then(() => {
       httpServer.listen(process.env.PORT || 3000, () => {
@@ -50,4 +54,8 @@ if (cluster.isPrimary) {
     .catch((err) => {
       console.log(`connection error: ${err.messsage}`);
     });
+  io.listen(process.env.SOCKET_PORT, (err) => {
+    console.log(`listening on ${process.env.SOCKET_PORT}`);
+    console.log(`Errors  on ${err}`);
+  });
 }
