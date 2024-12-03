@@ -40,6 +40,13 @@ const UserSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
+    otp: {
+      type: Number,
+    },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
